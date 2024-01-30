@@ -1,0 +1,26 @@
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+    },
+    handle(handlerInput) {
+        const speakOutput = "Welcome. {repalce_content} Would you like to continue? Please say yes to continue or no to exit.";
+
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const NoExitIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'NoExitIntent';
+    },
+    handle(handlerInput) {
+    const speakOutput = 'Thank you! Goodbye.';
+    return handlerInput.responseBuilder
+      .speak(speakOutput)
+      .getResponse();
+    }
+}

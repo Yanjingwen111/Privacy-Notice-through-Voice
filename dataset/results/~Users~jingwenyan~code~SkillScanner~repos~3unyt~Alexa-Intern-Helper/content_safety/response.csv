@@ -1,0 +1,27 @@
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/reminders.js,"""There was a problem connecting to the service.""",58,55,58,102
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,34,20,34,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,repromptText,35,23,35,34
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,noEmailResponse,54,30,54,44
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speechResponse,60,30,60,43
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speechResponse,62,33,62,46
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,messages.NOTIFY_MISSING_PERMISSIONS,68,16,68,50
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,messages.ERROR,73,46,73,59
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,119,20,119,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,120,23,120,33
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,149,20,149,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,'When is your start date?',150,23,150,48
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,182,20,182,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,183,23,183,33
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,211,20,211,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,212,23,212,33
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,265,20,265,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,266,23,266,33
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,300,20,300,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,301,23,301,33
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,317,20,317,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,318,23,318,33
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,331,20,331,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,358,20,358,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,'add a reprompt if you want to keep the session open for the user to respond',359,25,359,101
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,376,20,376,30
+/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js,speakOutput,377,23,377,33
