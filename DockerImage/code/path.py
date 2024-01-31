@@ -12,4 +12,3 @@ add_intent_path = os.path.join(data_set_path, 'add_intent.txt')
 
 final_path = os.path.join(data_collection_results_path, 'final')
 chatGPT_path = os.path.join(data_collection_results_path, 'chatGPT')
-
