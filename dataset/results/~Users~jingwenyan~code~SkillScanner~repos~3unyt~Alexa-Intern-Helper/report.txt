@@ -1,5 +1,0 @@
-outputs data collection	/Users/jingwenyan/code/SkillScanner/repos/3unyt/Alexa-Intern-Helper/lambda/index.js	hello! welcome to amazon intern helper. what is your name?	collect data name	
-permission data collection	name	
-permission data collection	email	
-This skill has an incomplete privacy policy: data ['name'] collected in output is not mentioned in privacy policy.	
-This skill has an incomplete privacy policy: data ['name', 'email'] collected in permission is not mentioned in privacy policy.	

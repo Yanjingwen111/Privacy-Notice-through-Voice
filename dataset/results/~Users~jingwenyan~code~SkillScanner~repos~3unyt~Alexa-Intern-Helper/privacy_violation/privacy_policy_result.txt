@@ -1,2 +1,0 @@
-This skill has an incomplete privacy policy: data ['name'] collected in output is not mentioned in privacy policy.
-This skill has an incomplete privacy policy: data ['name', 'email'] collected in permission is not mentioned in privacy policy.
