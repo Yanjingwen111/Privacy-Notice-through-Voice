@@ -1,6 +1,6 @@
 # Instructions
 
-Place your openai api key in Line 6 of /privacy_notice_generator/chatGPT_summary.py
+Place your own openai api key in Line 6 of /DockerImage/code/privacy_notice_generator/chatGPT_summary.py
 
 If you prefer use Docker, Please exexute the following commands:
 * Place the repos and result folder in the /dataset.
