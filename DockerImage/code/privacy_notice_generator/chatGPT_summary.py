@@ -9,7 +9,7 @@ def chatgpt_summarize(content, folder_path, filename):
     message = "If my input is 'data collection during conversation: birthday, data collection during conversation: age, ', \
                Your ouptut should be 'This skill will collect your birthday and age during the conversation.'\
                If my input is 'data collection during conversation: name, ', \
-               Your ouptut should be 'This skill will collect your name.'\
+               Your ouptut should be 'This skill will collect your name during the conversation.'\
                If my input is 'permission data collection: name, '. \
                Your ouptut should be 'This skill will seek your name permission.'\
                If my input is 'permission data collection: name, permission data collection: email, '. \
