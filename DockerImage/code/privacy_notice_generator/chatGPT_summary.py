@@ -6,16 +6,18 @@ def chatgpt_summarize(content, folder_path, filename):
     # place your openai api key here
     openai.api_key = ''
     messages = [ {"role": "system", "content": "You are a intelligent assistant."} ]
-    message = "If my input is 'data collection during conversation: birthday, data collection during conversation: age, ', \
-               Your ouptut should be 'This skill will collect your birthday and age during the conversation.'\
+    message = "If my input is 'data collection during conversation: birthday, data collection during conversation: age, data collection during conversation: address, ', \
+               Your ouptut should be 'This skill will collect your birthday, age and address during the conversation.'\
                If my input is 'data collection during conversation: name, ', \
                Your ouptut should be 'This skill will collect your name during the conversation.'\
                If my input is 'permission data collection: name, '. \
                Your ouptut should be 'This skill will seek your name permission.'\
-               If my input is 'permission data collection: name, permission data collection: email, '. \
-               Your ouptut should be 'This skill will seek your name and email permission.'\
-               If my input is 'data collection during conversation: birthday, data collection during conversation: age, permission data collection: name, permission data collection: email, '\
-               Your ouptut should be 'This skill will collect your birthday and age during the conversation. Also, this skill will seek your name and age email permission.'\
+               If my input is 'permission data collection: name, permission data collection: email, permission data collection: age, '. \
+               Your ouptut should be 'This skill will seek your name, email and age permissions.'\
+               If my input is 'data collection during conversation: name, permission data collection: name, ', \
+               Your ouptut should be 'This skill will collect your name during the conversation. Also, this skill will seek your name permission.'\
+               If my input is 'data collection during conversation: birthday, data collection during conversation: age, data collection during conversation: name, permission data collection: name, permission data collection: address, permission data collection: email, '\
+               Your ouptut should be 'This skill will collect your birthday, age and name during the conversation. Also, this skill will seek your name, address and age email permissions.'\
                Please remember above rules. The input is as follows: " + content
     # print("Input: " + message)
     
