@@ -5,7 +5,7 @@ Place your own openai api key in Line 6 of /DockerImage/code/privacy_notice_gene
 If you prefer use Docker, Please exexute the following commands:
 * Place the repos and result folder in the /dataset.
 * Run ./build.sh
-* Run ./run.sh
+* Run ./run.sh twice.
 * You can check the reuslt from /dataset/repo. There will be a new index_new.js. And the json file has been modified. 
 * Upload modified files to Alexs skill developer console to test.
 
