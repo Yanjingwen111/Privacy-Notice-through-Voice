@@ -16,8 +16,8 @@ def chatgpt_summarize(content, folder_path, filename):
                Your ouptut should be 'This skill will seek your name, email and age permissions.'\
                If my input is 'data collection during conversation: name, permission data collection: name, ', \
                Your ouptut should be 'This skill will collect your name during the conversation. Also, this skill will seek your name permission.'\
-               If my input is 'data collection during conversation: birthday, data collection during conversation: age, data collection during conversation: name, permission data collection: name, permission data collection: address, permission data collection: email, '\
-               Your ouptut should be 'This skill will collect your birthday, age and name during the conversation. Also, this skill will seek your name, address and age email permissions.'\
+               If my input is 'data collection during conversation: birthday, data collection during conversation: age, data collection during conversation: name, permission data collection: name, permission data collection: phone number, permission data collection: email, '\
+               Your ouptut should be 'This skill will collect your birthday, age and name during the conversation. Also, this skill will seek your name, phone number and email permissions.'\
                Please remember above rules. The input is as follows: " + content
     # print("Input: " + message)
     
