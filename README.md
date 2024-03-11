@@ -3,7 +3,7 @@
 Place your own openai api key in Line 6 of /DockerImage/code/privacy_notice_generator/chatGPT_summary.py
 
 If you prefer use Docker, Please exexute the following commands:
-* Place the repos and result folder in the /dataset.
+* Place the your own skills code in the /dataset/repos.
 * Run ./build.sh
 * Run ./run.sh (run again if /dataset/results directory has output but /dataset/repo doesn't have any update).
 * You can check the reuslt from /dataset/repo. There will be a new index_new.js. And the json file has been modified. 
