@@ -15,3 +15,5 @@ You can also exexute the code directly:
 * Run python -m spacy download en_core_web_sm
 * Run DockerImage/code/data_collection_analysis/scan_skills.py
 * Run DockerImage/code/privacy_notice_generator/main.py
+
+hhgjhwg2hdj1
