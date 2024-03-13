@@ -36,7 +36,21 @@ def modify_json_code():
                 {
                     "name": "YesContinueIntent",
                     "slots": [],
-                    "samples": ["yes", "yes continue", "continue"]
+                    "samples": ["yes", "yes continue", "continue", "i don't want to know"]
+                },
+                {
+                    "name": "WantknowIntent",
+                    "slots": [],
+                    "samples": [
+                        "i want to know"
+                    ]
+                },
+                {
+                    "name": "DataCollectionIntent",
+                    "slots": [],
+                    "samples": [
+                        "tell me what data is collected"
+                    ]
                 }
             ]
 

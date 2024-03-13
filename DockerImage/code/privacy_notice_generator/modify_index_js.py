@@ -47,7 +47,9 @@ def replace_launch_request(code):
 def add_exports_handler(code):
     new_handlers = """
     NoExitIntentHandler,
-    YesContinueIntentHandler,"""
+    YesContinueIntentHandler,
+    WantKnowIntentHandler,
+    DataCollectionIntentHandler,"""
 
     add_handlers_start = code.find("addRequestHandlers(")
     add_handlers_end = find_matching_bracket(code, add_handlers_start + len("addRequestHandlers("))
