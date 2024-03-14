@@ -81,9 +81,7 @@ const YesContinueIntentHandler = {
         const sessionAttributes = attributesManager.getSessionAttributes() || {};
         const userName = sessionAttributes.hasOwnProperty('name') ? sessionAttributes.name : "";
 
-        const speakOutput = userName
-            ? `Welcome ${userName}, when is your start date?`
-            : 'Hello! Welcome to Amazon Intern Helper. What is your name?';
+        const speakOutput = 'Hello! Welcome to Amazon Intern Helper. What is your name?';
             
         const repromptText = 'I\'m excited to hear that you\'ll be starting at Amazon. When is your start date?';
         return handlerInput.responseBuilder
@@ -93,91 +91,6 @@ const YesContinueIntentHandler = {
         
     }
 };
-
-const EmailIntentHandler = {
-  canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'EmailIntent';
-  },
-  async handle(handlerInput) {
-    const { serviceClientFactory, responseBuilder } = handlerInput;
-    try {
-      const upsServiceClient = serviceClientFactory.getUpsServiceClient();
-      const profileEmail = await upsServiceClient.getProfileEmail();
-      if (!profileEmail) {
-        const noEmailResponse = `It looks like you don't have an email set. You can set your email from the companion app.`
-        return responseBuilder
-                      .speak(noEmailResponse)
-                      .withSimpleCard(APP_NAME, noEmailResponse)
-                      .getResponse();
-      }
-      const speechResponse = `Your email is, ${profileEmail}`;
-      return responseBuilder
-                      .speak(speechResponse)
-                      .withSimpleCard(APP_NAME, speechResponse)
-                      .reprompt(speechResponse)
-                      .getResponse();
-    } catch (error) {
-      console.log(JSON.stringify(error));
-      if (error.statusCode === 403) {
-        return responseBuilder
-        .speak(messages.NOTIFY_MISSING_PERMISSIONS)
-        .withAskForPermissionsConsentCard([EMAIL_PERMISSION])
-        .getResponse();
-      }
-      console.log(JSON.stringify(error));
-      const response = responseBuilder.speak(messages.ERROR).getResponse();
-      return response;
-    }
-  },
-}
-
-const getEmail = async (handlerInput) => {
-    const response = {error: true, message: null, email: null};
-    const { serviceClientFactory, responseBuilder } = handlerInput;
-    try {
-      const upsServiceClient = serviceClientFactory.getUpsServiceClient();
-      const profileEmail = await upsServiceClient.getProfileEmail();
-      if (!profileEmail) {
-        response.message = `It looks like you don't have an email set. You can set your email from the Alexa companion app.`;
-        return response;
-      } else response.error = false;
-      response.email = profileEmail;
-      return response;
-    } catch (error) {
-      if (error.statusCode === 403) response.message = messages.NOTIFY_MISSING_PERMISSIONS;
-      return response;
-    }
-}
-
-
-const HasNameDateLaunchRequestHandler = {
-    canHandle(handlerInput) {
-        console.log(JSON.stringify(handlerInput.requestEnvelope.request));
-        const attributesManager = handlerInput.attributesManager;
-        const sessionAttributes = attributesManager.getSessionAttributes() || {};
-        
-        const userName = sessionAttributes.hasOwnProperty('name') ? sessionAttributes.name : "";
-        const startDate = sessionAttributes.hasOwnProperty('startDate') ? sessionAttributes.startDate : 0;
-        
-        return handlerInput.requestEnvelope.request.type === 'LaunchRequest' &&
-            userName &&
-            startDate;
-    },
-    async handle(handlerInput) {
-        const attributesManager = handlerInput.attributesManager;
-        const sessionAttributes = attributesManager.getSessionAttributes() || {};
-        const userName = sessionAttributes.hasOwnProperty('name') ? sessionAttributes.name : "";
-        const diffDays = await getDiffToStartDate(handlerInput);
-        const speakOutput = `Welcome back ${userName}. It looks like there are ${diffDays} days until your start date.`
-
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
-};
-
 
 const CaptureUserNameHandler = {
     canHandle(handlerInput) {
@@ -195,12 +108,7 @@ const CaptureUserNameHandler = {
 
         const date = sessionAttributes.hasOwnProperty('startDate') ? sessionAttributes.startDate : 0;
         let speakOutput; 
-        if (date){
-            speakOutput = `Thanks ${userName}, your start date is ${date.month} ${date.day}, ${date.year}.`
-        } else {
-            speakOutput = `Thanks ${userName}, when is your start date?`;
-        }
-
+        speakOutput = `Thanks ${userName}, when is your start date?`;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt('When is your start date?')
@@ -241,162 +149,6 @@ const CaptureStartDateIntentHandler = {
     }
 };
 
-/*
- * Handles retrieving the "latest" task, in a sort of "stack" style, for the intern to complete.
- * If the intern completed the task and lets us know, we store it and not ask the intern about that task again.
-*/
-const WhatToDoNextIntentHandler = {
-    canHandle(handlerInput) {
-        const request = handlerInput.requestEnvelope.request;
-        return request.type === 'IntentRequest'
-            && request.intent.name === 'WhatToDoNextIntent';
-            
-    },
-    async handle(handlerInput) {
-        const [nextTask, speakOutput] = await getNextTask(handlerInput);
-
-        if (nextTask !== 'NONE') {
-            const attributesManager = handlerInput.attributesManager;
-            const sessionAttributes = attributesManager.getSessionAttributes() || {};
-            sessionAttributes.taskType = nextTask;
-            sessionAttributes.sessionState = "check_task_completed";
-            attributesManager.setPersistentAttributes(sessionAttributes);
-            await attributesManager.savePersistentAttributes();
-        }
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
-};
-
-const YesIntentHandler = {
-    canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.YesIntent';
-    },
-
-    async handle(handlerInput){
-        const attributesManager = handlerInput.attributesManager;
-        const sessionAttributes = attributesManager.getSessionAttributes();
-        const task = sessionAttributes.taskType;
-        const userName = sessionAttributes.name;
-        let speakOutput;
-        switch(sessionAttributes.sessionState) {
-            case "check_task_completed":
-                speakOutput = 'Awesome!';
-                sessionAttributes.sessionState = "default";
-                sessionAttributes[task] = true;
-                attributesManager.setPersistentAttributes(sessionAttributes);
-                await attributesManager.savePersistentAttributes();
-                break;
-            
-            case "send_email":
-                const email = await getEmail(handlerInput);
-                if (email.error) {
-                    return EmailIntentHandler.handle(handlerInput);
-                }
-                const userInfo = {
-                    userName: userName,
-                    emailAddress: email.email
-                }
-                const emailResponse = sendEmailNotification(task, userInfo);
-                if (emailResponse.error) {
-                    // error, don't save that the task is completed, just let the user know that there was an email-related error
-                    speakOutput = `Sorry, ${userName}, there was a problem with sending the email. Please try again later!`;
-                } else {
-                    speakOutput = `Alright, ${userName}, I've sent them an email! Hopefully you hear about it soon.`;
-                    sessionAttributes[task] = true;
-                    sessionAttributes.sessionState = "default";
-                    attributesManager.setPersistentAttributes(sessionAttributes);
-                    await attributesManager.savePersistentAttributes();
-                }
-                break
-            
-            default:
-                speakOutput = 'Sorry, this is an invalid answer. Please try again.'
-
-        }
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-
-    }
-
-}
-
-const NoIntentHandler = {
-    canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.NoIntent';
-    },
-    async handle(handlerInput){
-        const attributesManager = handlerInput.attributesManager;
-        const sessionAttributes = attributesManager.getSessionAttributes();
-        const task = sessionAttributes.taskType;
-        let speakOutput;
-        switch(sessionAttributes.sessionState) {
-            case "check_task_completed":
-                speakOutput = 'Ok. I can send an email to Amazon for you to help you with this. Would you like that?';
-                sessionAttributes.sessionState = "send_email";
-                attributesManager.setPersistentAttributes(sessionAttributes);
-                await attributesManager.savePersistentAttributes();
-                break;
-            case "send_email":
-                speakOutput = 'OK, I will not contact them';
-                sessionAttributes.sessionState = "default";
-                attributesManager.setPersistentAttributes(sessionAttributes);
-                await attributesManager.savePersistentAttributes();
-                break;
-            default:
-                speakOutput = 'Sorry, this is an invalid answer. Please try again.'
-        }
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
-
-}
-
-
-const HelpIntentHandler = {
-    canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
-    },
-    handle(handlerInput) {
-        const speakOutput = 'You can say hello to me! How can I help?';
-
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt(speakOutput)
-            .getResponse();
-    }
-};
-const CancelAndStopIntentHandler = {
-    canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-                || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
-    },
-    handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .getResponse();
-    }
-};
-const SessionEndedRequestHandler = {
-    canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
-    },
-    handle(handlerInput) {
-        // Any cleanup logic goes here.
-        return handlerInput.responseBuilder.getResponse();
-    }
-};
 
 // The intent reflector is used for interaction model testing and debugging.
 // It will simply repeat the intent the user said. You can create custom handlers
@@ -460,19 +212,11 @@ exports.handler = Alexa.SkillBuilders.custom()
     NoExitIntentHandler,
     YesContinueIntentHandler,
     WantKnowIntentHandler,
-    DataCollectionIntentHandler,
-        //HasNameDateLaunchRequestHandler,
-        LaunchRequestHandler,
-        WhatToDoNextIntentHandler,
-        YesIntentHandler,
-        NoIntentHandler,
-        CaptureUserNameHandler,
-        EmailIntentHandler,
-        CaptureStartDateIntentHandler,
-        HelpIntentHandler,
-        CancelAndStopIntentHandler,
-        SessionEndedRequestHandler,
-        IntentReflectorHandler) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+    DataCollectionIntentHandler,        
+    LaunchRequestHandler,
+    CaptureUserNameHandler,
+    CaptureStartDateIntentHandler,
+       ) // make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
     .addErrorHandlers(
         ErrorHandler)
     .addRequestInterceptors(
