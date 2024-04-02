@@ -39,7 +39,7 @@ def modify_json_code():
                     "samples": ["yes", "yes continue", "continue", "i don't want to know"]
                 },
                 {
-                    "name": "WantknowIntent",
+                    "name": "WantKnowIntent",
                     "slots": [],
                     "samples": [
                         "i want to know"

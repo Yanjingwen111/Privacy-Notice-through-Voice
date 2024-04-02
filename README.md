@@ -8,6 +8,7 @@ If you prefer use Docker, Please exexute the following commands:
 * Run ./run.sh (run again if /dataset/results directory has output but /dataset/repo doesn't have any update).
 * You can check the reuslt from /dataset/repo. There will be a new index_new.js. And the json file has been modified. 
 * Upload modified files to Alexs skill developer console to test.
+* Please note everytime you upload new repos or do any changes, rerun ./build.sh
 
 You can also exexute the code directly:
 * Run pip install openai

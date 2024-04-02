@@ -90,6 +90,13 @@
                     "samples": [
                         "tell me what data is collected"
                     ]
+                },
+                {
+                    "name": "WantKnowIntent",
+                    "slots": [],
+                    "samples": [
+                        "i want to know"
+                    ]
                 }
             ],
             "types": []
