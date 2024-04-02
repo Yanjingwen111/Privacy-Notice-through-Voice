@@ -48,23 +48,3 @@ def filter_js_file():
         final_repo_path = os.path.join(repo_path, author_path, skill_path)
         final_rewrite_path.append(final_repo_path)
     return final_rewrite_path
-
-# def copy_repo():
-#     index_js_files_final = filter_js_file(repo_with_dc)
-#     for file_path in index_js_files_final:
-#         parts = file_path.split('/')
-#         try:
-#             dataset_index = parts.index('dataset')
-#             repos_index = parts.index('repos')
-#         except ValueError:
-#             print("One of the specified elements was not found.")
-#         if repos_index - dataset_index == 1:
-#             author_path = parts[repos_index + 1]
-#             skill_path = parts[repos_index + 2]
-#         else:
-#             print("The elements 'dataset' and 'repos' are not in the expected sequence.")
-#         destination_path = os.path.join(filter_path, author_path, skill_path)
-#         source_path = os.path.join(repo_path, author_path, skill_path)
-#         # print ("d: ", destination_path, "lv: ", source_path)
-#         if not os.path.exists(destination_path):
-#             shutil.copytree(source_path, destination_path)
