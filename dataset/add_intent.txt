@@ -15,7 +15,7 @@ const LaunchRequestHandler = {
 const WantKnowIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-            && handlerInput.requestEnvelope.request.intent.name === 'WantknowIntent';
+            && handlerInput.requestEnvelope.request.intent.name === 'WantKnowIntent';
     },
     handle(handlerInput) {
     const speakOutput = '{repalce_content} Please say yes to continue or no to exit.';
