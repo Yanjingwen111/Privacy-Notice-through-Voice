@@ -78,7 +78,7 @@
                     ]
                 },
                 {
-                    "name": "WantknowIntent",
+                    "name": "WantKnowIntent",
                     "slots": [],
                     "samples": [
                         "i want to know"
@@ -89,13 +89,6 @@
                     "slots": [],
                     "samples": [
                         "tell me what data is collected"
-                    ]
-                },
-                {
-                    "name": "WantKnowIntent",
-                    "slots": [],
-                    "samples": [
-                        "i want to know"
                     ]
                 }
             ],
